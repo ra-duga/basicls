@@ -21,10 +21,11 @@ class Developers extends \yii\db\ActiveRecord
 
     public function beforeSave($insert)
     {
+      // Установим дату создания и обнвления
       if (parent::beforeSave($insert)) {
         if($insert == true)
         {
-          $this->create_date=$this->update_date=time();
+          $this->create_date=time();
         }
         else
           $this->update_date=time();
@@ -32,13 +33,6 @@ class Developers extends \yii\db\ActiveRecord
       } else {
         return false;
       }
-    }
-    public function relations()
-    { 
-    
-      return array(
-       // 'assortiment'=>array(self::HAS_MANY, 'developers', 'id'),
-      );
     }
 
 
@@ -83,7 +77,7 @@ class Developers extends \yii\db\ActiveRecord
      */
     public function getObjects()
     {
-        return $this->hasMany(Objects::className(), ['developers_id' => 'id']);
+  //      return $this->hasMany(Objects::className(), ['developers_id' => 'id']);
     }
     
     
