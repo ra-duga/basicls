@@ -6,15 +6,14 @@ use yii\grid\GridView;
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Objects';
+$this->title = 'Объекты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="objects-index">
+<div class="developers-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Create Objects', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Добавить объект', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -22,13 +21,9 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'developers_id',
             'name',
             'descripition',
-            'logotype',
-            // 'create_date',
-            // 'update_date',
+            'developer.name',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

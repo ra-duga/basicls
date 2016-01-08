@@ -11,14 +11,28 @@ use Yii;
  * @property integer $developers_id
  * @property string $name
  * @property string $descripition
+ * @property integer $create_date
+ * @property integer $update_date
  * @property string $logotype
- * @property string $create_date
- * @property string $update_date
- *
- * @property Developers $developers
  */
 class Objects extends \yii\db\ActiveRecord
 {
+    public function beforeSave($insert)
+    {
+      // Установим дату создания и обнвления
+      if (parent::beforeSave($insert)) {
+        if($insert == true)
+        {
+          $this->create_date=time();
+        }
+        else
+          $this->update_date=time();
+        return true;
+      } else {
+        return false;
+      }
+    }
+
     /**
      * @inheritdoc
      */
@@ -33,21 +47,17 @@ class Objects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'developers_id'], 'required'],
-            [['id', 'developers_id'], 'integer'],
-            [['name', 'descripition', 'logotype', 'create_date', 'update_date'], 'string', 'max' => 45],
-            [['developers_id'], 'exist', 'skipOnError' => true, 'targetClass' => Developers::className(), 'targetAttribute' => ['developers_id' => 'id']],
+            [['developers_id', 'name'], 'required'],
+            [['developers_id'], 'integer'],
+            [['name', 'descripition', 'logotype'], 'string'],
         ];
     }
-
-
-    public function relations()
+  public function relations()
     {
-      return array(
-      'developers_id' => array(self::BELONGS_TO, 'Developers', 'id'),
-      );
+        return array(
+            'developers'=>array(self::BELONGS_TO, 'Developers', 'developers_id'),
+        );
     }
-
 
     /**
      * @inheritdoc
@@ -56,20 +66,17 @@ class Objects extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'developers_id' => 'Developers ID',
-            'name' => 'Name',
-            'descripition' => 'Descripition',
-            'logotype' => 'Logotype',
+            'developer.name' => 'Застройщик',
+            'name' => 'Название',
+            'descripition' => 'Описание',
             'create_date' => 'Create Date',
             'update_date' => 'Update Date',
+            'logotype' => 'Логотип',
         ];
     }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getDevelopers()
+    
+    public function getDeveloper()
     {
         return $this->hasOne(Developers::className(), ['id' => 'developers_id']);
-    }
+    }    
 }

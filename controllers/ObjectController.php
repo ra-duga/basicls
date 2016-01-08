@@ -4,13 +4,15 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Objects;
+use app\models\Developers;
+use app\controllers\DeveloperController;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ObjectController implements the CRUD actions for Objects model.
+ * ObjectsController implements the CRUD actions for Objects model.
  */
 class ObjectController extends Controller
 {
@@ -44,13 +46,13 @@ class ObjectController extends Controller
     /**
      * Displays a single Objects model.
      * @param integer $id
-     * @param integer $developers_id
      * @return mixed
      */
-    public function actionView($id, $developers_id)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id, $developers_id),
+            'model' => $this->findModel($id),
+
         ]);
     }
 
@@ -64,7 +66,7 @@ class ObjectController extends Controller
         $model = new Objects();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'developers_id' => $model->developers_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -76,15 +78,14 @@ class ObjectController extends Controller
      * Updates an existing Objects model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
-     * @param integer $developers_id
      * @return mixed
      */
-    public function actionUpdate($id, $developers_id)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id, $developers_id);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'developers_id' => $model->developers_id]);
+            return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -96,12 +97,11 @@ class ObjectController extends Controller
      * Deletes an existing Objects model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
-     * @param integer $developers_id
      * @return mixed
      */
-    public function actionDelete($id, $developers_id)
+    public function actionDelete($id)
     {
-        $this->findModel($id, $developers_id)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -110,13 +110,12 @@ class ObjectController extends Controller
      * Finds the Objects model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @param integer $developers_id
      * @return Objects the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id, $developers_id)
+    protected function findModel($id)
     {
-        if (($model = Objects::findOne(['id' => $id, 'developers_id' => $developers_id])) !== null) {
+        if (($model = Objects::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

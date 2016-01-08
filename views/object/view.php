@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Objects */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Objects', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Объект', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="objects-view">
@@ -15,8 +15,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id, 'developers_id' => $model->developers_id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'developers_id' => $model->developers_id], [
+        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
@@ -24,17 +24,17 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
     </p>
-
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
             'developers_id',
-            'name',
-            'descripition',
-            'logotype',
-            'create_date',
-            'update_date',
+            'developer.name',
+            'name:ntext',
+            'descripition:ntext',
+            'create_date:Datetime',
+            'update_date:Datetime',
+            'logotype:ntext',
         ],
     ]) ?>
 
