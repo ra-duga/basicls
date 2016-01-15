@@ -83,6 +83,6 @@ class Developers extends \yii\db\ActiveRecord
     
     public static function getList()
     { 
-    return  Developers::find()->All();
-}
+      return  Developers::find()->All();
+    }
 }

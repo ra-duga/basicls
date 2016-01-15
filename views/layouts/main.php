@@ -209,7 +209,7 @@ AppAsset::register($this);
                     <?= Html::a('Агенты', ['agent/index']) ?>
                     </li>
                     <li>
-                        <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                        <?= Html::a('Комиссионные', ['comission/index']) ?>
                     </li>
 
                     <li>

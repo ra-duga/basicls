@@ -48,6 +48,10 @@ class Agents extends \yii\db\ActiveRecord
             'phone' => 'Контактный телефон',
         ];
     }
+    public static function getList()
+    { 
+      return  Agents::find()->All();
+    }
 
     /**
      * @return \yii\db\ActiveQuery

@@ -62,6 +62,11 @@ class Objects extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
+    public static function getList()
+    { 
+      return  Objects::find()->All();
+    }
+    
     public function attributeLabels()
     {
         return [
