@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Agents */
@@ -35,5 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'phone',
         ],
     ]) ?>
+
 
 </div>

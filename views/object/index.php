@@ -10,12 +10,9 @@ $this->title = 'Объекты';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="developers-index">
-
-
     <p>
         <?= Html::a('Добавить объект', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'columns' => [
@@ -28,5 +25,4 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-
 </div>

@@ -80,4 +80,12 @@ class Comission extends \yii\db\ActiveRecord
     {
         return $this->hasOne(Objects::className(), ['id' => 'objects_id']);
     }
+
+    function getComissions()
+      {
+          return new ActiveDataProvider([
+              'query' => Post::find()->all()
+          ]);
+      }
+    
 }

@@ -4,6 +4,9 @@ namespace app\controllers;
 
 use Yii;
 use app\models\Agents;
+use app\models\Comission;
+use app\models\Objects;
+
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -48,10 +51,19 @@ class AgentController extends Controller
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+      $agents = Agents::findOne(['id' => $id]);    
+ 
+      return $this->render('view', [
+          'model' => $this->findModel($id),
+          'comission' => $agents->getComissions($id),
+          
+      ]);
+            
     }
+    
+    
+    
+
 
     /**
      * Creates a new Agents model.
@@ -89,6 +101,9 @@ class AgentController extends Controller
             ]);
         }
     }
+
+
+
 
     /**
      * Deletes an existing Agents model.
