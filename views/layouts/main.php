@@ -199,14 +199,12 @@ AppAsset::register($this);
                     <li class="active">
                         <?= Html::a('Главная', ['site/index'], ['ta' => 'fa fa-fw fa-dashboard']) ?>
                     </li>
+
                     <li>
-                        <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                      <?= Html::a('Клиенты', ['client/index']) ?>
                     </li>
                     <li>
-                        <?= Html::a('Клиенты', ['client/index']) ?>
-                    </li>
-                    <li>
-                    <?= Html::a('Агенты', ['agent/index']) ?>
+                      <?= Html::a('Агенты', ['agent/index']) ?>
                     </li>
                     <li>
                         <?= Html::a('Комиссионные', ['comission/index']) ?>
@@ -221,6 +219,8 @@ AppAsset::register($this);
                             <li>
                                 <?= Html::a('Объекты', ['object/index']) ?>
                             </li>
+
+
                         </ul>
                     </li>
                     <li>
